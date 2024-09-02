@@ -2,6 +2,7 @@ from flask import Flask, render_template
 import pandas as pd
 
 app = Flask('Dictionary_API')
+df = pd.read_csv('dictionary.csv')
 
 
 @app.route('/')
@@ -11,7 +12,7 @@ def home():
 
 @app.route('/api/v1/<word>')
 def translate(word):
-    df = pd.read_csv('dictionary.csv')
+
     if word in df['word'].values:
         translation = df.loc[df['word'] == word]['definition'].squeeze()
 
